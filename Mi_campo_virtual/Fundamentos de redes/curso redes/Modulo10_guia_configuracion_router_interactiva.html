@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 10: Configuración Básica de un Router - Guía Interactiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-emerald-500/10 text-emerald-400 rounded-lg border border-emerald-500/20">
+          <i class="ph ph-terminal-window text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Módulo 10: Configuración Básica de un Router</h1>
+          <p class="text-xs text-slate-400">Fundamentos de Redes • Cisco IOS CLI</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded-full text-xs font-semibold">
+        CCNA - Módulo 10
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-2">
+      <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 sticky top-24">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">Contenido</h2>
+        <nav class="space-y-1 text-sm">
+          <a href="#inicial" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">10.1 Ajustes Iniciales</a>
+          <a href="#interfaces" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">10.2 Interfaces de Router</a>
+          <a href="#gateway" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">10.3 Gateway Predeterminado</a>
+          <a href="#cli-sim" class="block px-3 py-2 rounded-lg text-emerald-400 font-medium hover:bg-slate-700 transition-colors">Simulador CLI Cisco</a>
+          <a href="#evaluacion" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">Autoevaluación</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <div class="lg:col-span-3 space-y-12">
+
+      <!-- Section 10.1 -->
+      <section id="inicial" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-gear text-2xl text-emerald-400"></i>
+          <h2 class="text-2xl font-bold text-white">10.1 Parámetros Iniciales del Router</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Secuencia esencial para configurar un router Cisco en el modo de configuración global:
+        </p>
+
+        <div class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-slate-200 border border-slate-800 space-y-2">
+          <p class="text-emerald-400"># Entrar a configuración global</p>
+          <p>Router# <span class="text-cyan-300">configure terminal</span></p>
+          <p>Router(config)# <span class="text-cyan-300">hostname R1</span></p>
+          <p class="text-emerald-400"># Cifrar contraseña de acceso privilegiado</p>
+          <p>R1(config)# <span class="text-cyan-300">enable secret class</span></p>
+          <p class="text-emerald-400"># Proteger consola y líneas VTY</p>
+          <p>R1(config)# <span class="text-cyan-300">line console 0</span></p>
+          <p>R1(config-line)# <span class="text-cyan-300">password cisco</span></p>
+          <p>R1(config-line)# <span class="text-cyan-300">login</span></p>
+        </div>
+      </section>
+
+      <!-- Section 10.2 -->
+      <section id="interfaces" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-plugs-connected text-2xl text-emerald-400"></i>
+          <h2 class="text-2xl font-bold text-white">10.2 Configuración y Verificación de Interfaces</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Las interfaces de un router vienen **apagadas por defecto**. Debes asignarles IP y encenderlas explícitamente con `no shutdown`.
+        </p>
+
+        <div class="bg-slate-950 p-4 rounded-xl font-mono text-xs text-slate-200 border border-slate-800 space-y-2">
+          <p>R1(config)# <span class="text-cyan-300">interface gigabitethernet 0/0/0</span></p>
+          <p>R1(config-if)# <span class="text-cyan-300">ip address 192.168.10.1 255.255.255.0</span></p>
+          <p>R1(config-if)# <span class="text-cyan-300">description Enlace hacia Switch LAN 1</span></p>
+          <p>R1(config-if)# <span class="text-cyan-300">no shutdown</span></p>
+          <p class="text-emerald-400">%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up</p>
+        </div>
+      </section>
+
+      <!-- CLI Simulator -->
+      <section id="cli-sim" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-code text-2xl text-emerald-400"></i>
+          <h2 class="text-2xl font-bold text-white">Simulador Interactivo Cisco CLI</h2>
+        </div>
+        <p class="text-xs text-slate-300">
+          Prueba comandos básicos. Comandos sugeridos: <code class="text-emerald-400">enable</code>, <code class="text-emerald-400">configure terminal</code>, <code class="text-emerald-400">hostname R1</code>, <code class="text-emerald-400">show ip interface brief</code>.
+        </p>
+
+        <div class="bg-black p-4 rounded-xl font-mono text-xs text-green-400 border border-slate-800 space-y-3 h-64 overflow-y-auto" id="cli-output">
+          <div>Cisco IOS Software, Router Operating System</div>
+          <div>Presiona ENTER o escribe un comando para comenzar.</div>
+          <div id="cli-history"></div>
+        </div>
+
+        <div class="flex gap-2">
+          <span id="cli-prompt" class="font-mono text-xs text-emerald-400 py-2">Router></span>
+          <input id="cli-input" type="text" class="flex-1 bg-slate-950 border border-slate-700 rounded p-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500" placeholder="Escribe un comando..." onkeydown="handleCLI(event)">
+        </div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="evaluacion" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-check-square-offset text-2xl text-emerald-400"></i>
+          <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 10</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3">
+            <p class="text-sm font-semibold text-white">1. ¿Qué comando es obligatorio ejecutar en la interfaz de un router Cisco para encenderla físicamente?</p>
+            <div class="space-y-2 text-xs">
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) enable interface</button>
+              <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) no shutdown</button>
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) ip address dhcp</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    let cliState = 'USER';
+    let routerName = 'Router';
+
+    function handleCLI(e) {
+      if (e.key === 'Enter') {
+        const input = document.getElementById('cli-input');
+        const cmd = input.value.trim();
+        const history = document.getElementById('cli-history');
+        const prompt = document.getElementById('cli-prompt');
+
+        let response = '';
+
+        if (cliState === 'USER') {
+          if (cmd === 'enable') {
+            cliState = 'PRIVILEGED';
+            prompt.innerText = `${routerName}#`;
+          } else {
+            response = 'Comando no reconocido. Escribe "enable" para entrar a modo privilegiado.';
+          }
+        } else if (cliState === 'PRIVILEGED') {
+          if (cmd === 'configure terminal' || cmd === 'conf t') {
+            cliState = 'CONFIG';
+            prompt.innerText = `${routerName}(config)#`;
+          } else if (cmd === 'show ip interface brief') {
+            response = 'Interface              IP-Address      OK? Method Status                Protocol\nGigabitEthernet0/0/0   192.168.10.1    YES manual up                    up';
+          } else {
+            response = 'Comando no reconocido. Prueba "configure terminal" o "show ip interface brief".';
+          }
+        } else if (cliState === 'CONFIG') {
+          if (cmd.startsWith('hostname ')) {
+            routerName = cmd.split(' ')[1];
+            prompt.innerText = `${routerName}(config)#`;
+            response = `Nombre del router actualizado a ${routerName}`;
+          } else if (cmd === 'exit') {
+            cliState = 'PRIVILEGED';
+            prompt.innerText = `${routerName}#`;
+          } else {
+            response = 'Comando aceptado en modo configuración. Escribe "exit" para salir.';
+          }
+        }
+
+        history.innerHTML += `<div><span class="text-slate-400">${prompt.innerText} ${cmd}</span></div>`;
+        if (response) {
+          history.innerHTML += `<div class="text-cyan-300 whitespace-pre-wrap">${response}</div>`;
+        }
+
+        input.value = '';
+        const output = document.getElementById('cli-output');
+        output.scrollTop = output.scrollHeight;
+      }
+    }
+
+    function checkQuiz(btn, isCorrect) {
+      const feedback = btn.parentElement.nextElementSibling;
+      feedback.classList.remove('hidden', 'bg-emerald-950', 'text-emerald-300', 'bg-rose-950', 'text-rose-300');
+      if (isCorrect) {
+        feedback.classList.add('bg-emerald-950', 'text-emerald-300');
+        feedback.innerText = '¡Correcto! Las interfaces de router vienen administrativamente apagadas por defecto. El comando "no shutdown" las activa.';
+      } else {
+        feedback.classList.add('bg-rose-950', 'text-rose-300');
+        feedback.innerText = 'Incorrecto. Inténtalo de nuevo.';
+      }
+    }
+  </script>
+</body>
+</html>

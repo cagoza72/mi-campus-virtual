@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 11: Asignación de Direcciones IPv4 y Subnetting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-amber-500/10 text-amber-400 rounded-lg border border-amber-500/20">
+          <i class="ph ph-projector-screen-chart text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Módulo 11: Asignación de Direcciones IPv4</h1>
+          <p class="text-xs text-slate-400">Fundamentos de Redes • Subnetting y VLSM</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 bg-amber-950 text-amber-300 border border-amber-800 rounded-full text-xs font-semibold">
+        CCNA - Módulo 11
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-2">
+      <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 sticky top-24">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">Contenido</h2>
+        <nav class="space-y-1 text-sm">
+          <a href="#estructura" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">11.1 Estructura IPv4</a>
+          <a href="#tipos" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">11.3 Tipos de IPs (Privadas/Públicas)</a>
+          <a href="#subnetting" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">11.5 / 11.8 Subnetting y VLSM</a>
+          <a href="#calculadora" class="block px-3 py-2 rounded-lg text-amber-400 font-medium hover:bg-slate-700 transition-colors">Calculadora de Hosts</a>
+          <a href="#evaluacion" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">Autoevaluación</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <div class="lg:col-span-3 space-y-12">
+
+      <!-- Section 11.1 -->
+      <section id="estructura" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-grid-four text-2xl text-amber-400"></i>
+          <h2 class="text-2xl font-bold text-white">11.1 Estructura y Operación AND</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Toda dirección IPv4 se compone de una porción de red y una porción de host delimitada por la máscara de subred. El router utiliza la operación lógica <b>AND</b> para descubrir si un paquete pertenece a su red local o debe enviarlo al Gateway.
+        </p>
+      </section>
+
+      <!-- Section 11.3 -->
+      <section id="tipos" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-shield-check text-2xl text-amber-400"></i>
+          <h2 class="text-2xl font-bold text-white">11.3 Rangos de Direcciones IPv4 Privadas (RFC 1918)</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Clase A Privada</span>
+            <strong class="text-amber-400 text-sm">10.0.0.0 /8</strong>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Clase B Privada</span>
+            <strong class="text-amber-400 text-sm">172.16.0.0 /12</strong>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700">
+            <span class="text-xs text-slate-400 block mb-1">Clase C Privada</span>
+            <strong class="text-amber-400 text-sm">192.168.0.0 /16</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subnet Calculator Tool -->
+      <section id="calculadora" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-calculator text-2xl text-amber-400"></i>
+          <h2 class="text-2xl font-bold text-white">Calculadora Rápida de Subnetting (Hosts / Bits)</h2>
+        </div>
+        <p class="text-xs text-slate-300">Selecciona la cantidad de bits de host disponibles para calcular cuántos equipos útiles permite la subred:</p>
+        
+        <div class="flex items-center gap-4 bg-slate-900 p-4 rounded-xl border border-slate-700">
+          <label class="text-xs text-slate-300">Bits de Host (h):</label>
+          <input id="host-bits" type="range" min="2" max="8" value="4" class="w-full accent-amber-500" oninput="calculateHosts()">
+          <span id="bits-val" class="font-mono text-amber-400 font-bold">4 bits</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+            <span class="text-slate-400 block">Total Direcciones (2^h):</span>
+            <strong id="total-ips" class="text-white text-base">16 IPs</strong>
+          </div>
+          <div class="p-4 bg-slate-950 rounded-xl border border-slate-800 space-y-1">
+            <span class="text-slate-400 block">Hosts Útiles (2^h - 2):</span>
+            <strong id="usable-ips" class="text-amber-400 text-base">14 Hosts</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- Quiz -->
+      <section id="evaluacion" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-check-square-offset text-2xl text-amber-400"></i>
+          <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 11</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3">
+            <p class="text-sm font-semibold text-white">1. ¿Por qué se resta 2 al calcular la cantidad de direcciones de host utilizables en una subred?</p>
+            <div class="space-y-2 text-xs">
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Porque se reservan dos IPs para los switches de capa 2</button>
+              <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) Porque una IP se asigna a la Red y la otra a la dirección de Broadcast</button>
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Porque el router consume obligatoriamente dos direcciones IP</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    function calculateHosts() {
+      const h = parseInt(document.getElementById('host-bits').value);
+      document.getElementById('bits-val').innerText = h + ' bits';
+      const total = Math.pow(2, h);
+      const usable = total - 2;
+      document.getElementById('total-ips').innerText = total + ' IPs';
+      document.getElementById('usable-ips').innerText = usable + ' Hosts';
+    }
+
+    function checkQuiz(btn, isCorrect) {
+      const feedback = btn.parentElement.nextElementSibling;
+      feedback.classList.remove('hidden', 'bg-emerald-950', 'text-emerald-300', 'bg-rose-950', 'text-rose-300');
+      if (isCorrect) {
+        feedback.classList.add('bg-emerald-950', 'text-emerald-300');
+        feedback.innerText = '¡Correcto! Se restan 2 direcciones: la primera para identificar la Red y la última para el Broadcast.';
+      } else {
+        feedback.classList.add('bg-rose-950', 'text-rose-300');
+        feedback.innerText = 'Incorrecto. Inténtalo de nuevo.';
+      }
+    }
+  </script>
+</body>
+</html>

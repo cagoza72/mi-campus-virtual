@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos de Redes - Portal del Curso CCNA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header / Navbar -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-cyan-500/10 text-cyan-400 rounded-lg border border-cyan-500/20">
+          <i class="ph ph-network text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Fundamentos de Redes (CCNA)</h1>
+          <p class="text-xs text-slate-400">Portal Académico Interactivo • 12 Módulos</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <input type="text" id="search-mod" placeholder="Buscar módulo..." class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-1.5 text-xs text-white focus:outline-none focus:border-cyan-500 w-48 md:w-64" oninput="filterModules()">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-slate-800/50 border-b border-slate-800 py-12 px-4 text-center">
+    <div class="max-w-4xl mx-auto space-y-4">
+      <span class="px-3 py-1 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded-full text-xs font-semibold">
+        Currículo Oficial CCNA
+      </span>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-white">Guías Interactivas y Simuladores de Red</h2>
+      <p class="text-sm text-slate-400 max-w-2xl mx-auto">
+        Plataforma de aprendizaje interactiva diseñada para la enseñanza práctica de redes de datos, simuladores de consola CLI y herramientas de subnetting.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Modules Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-12 flex-1 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-grid">
+
+      <!-- Módulo 1 -->
+      <a href="modulo1_guia_redes_actualidad_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 1</span>
+            <i class="ph ph-globe-hemisphere-east text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Las redes en la actualidad</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Componentes de red, topologías, arquitecturas confiables y tendencias tecnológicas modernas.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 2 -->
+      <a href="Modulo2_guia_configuracion_switches_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 2</span>
+            <i class="ph ph-terminal text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Configuración básica de switches</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Acceso a Cisco IOS, navegación entre modos CLI, seguridad básica y direccionamiento SVI.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 3 -->
+      <a href="Modulo3_guia_protocolos_modelos_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 3</span>
+            <i class="ph ph-stack text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Protocolos y modelos</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Reglas de comunicación, modelos de referencia OSI y TCP/IP, y proceso de encapsulamiento.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 5 -->
+      <a href="modulo5_sistemas_num_ricos_gu_a_completa_de_estudio_e_int.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 5</span>
+            <i class="ph ph-lightning text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">La capa física (Sistemas numéricos)</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Propósito de la capa física, sistemas numéricos y medios de transmisión de red.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 6 -->
+      <a href="Modulo6_capa_de_enlace_de_datos_gu_a_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 6</span>
+            <i class="ph ph-link text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Capa de enlace de datos</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Control de acceso al medio, subcapas LLC y MAC, y tramas de control físico.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 7 -->
+      <a href="Modulon7_guia_ethernet_switches_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 7</span>
+            <i class="ph ph-cpu text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Conmutación Ethernet</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Tramas Ethernet, tablas CAM del switch, métodos de reenvío y dominios de colisión.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 8 -->
+      <a href="Modulo8_guia_capa_red_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 8</span>
+            <i class="ph ph-globe-hemisphere-west text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Capa de red</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Características de IP, encabezados IPv4/IPv6, campo TTL y tablas de enrutamiento.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 9 -->
+      <a href="Modulo9_guia_resolucion_direcciones_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 9</span>
+            <i class="ph ph-address-book text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Resolución de dirección</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Protocolo ARP, tablas caché, broadcast y detección de vecinos IPv6 (ICMPv6 ND).</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 10 -->
+      <a href="Modulo10_guia_configuracion_router_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 10</span>
+            <i class="ph ph-terminal-window text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Configuración básica de un router</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Parámetros iniciales, activación de interfaces físicas (no shutdown) y puertas de enlace.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 11 -->
+      <a href="Modulo11_guia_asignacion_ipv4_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 11</span>
+            <i class="ph ph-projector-screen-chart text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Asignación de direcciones IPv4</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Estructura de red/host, operación lógica AND, subnetting tradicional y VLSM.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Módulo 12 -->
+      <a href="Modulo12_guia_ipv6_interactiva.html" class="module-card bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-3">
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-semibold text-cyan-400 font-mono">MÓDULO 12</span>
+            <i class="ph ph-globe text-slate-500 group-hover:text-cyan-400 text-xl transition-colors"></i>
+          </div>
+          <h3 class="text-lg font-bold text-white group-hover:text-cyan-300 transition-colors">Asignación de direcciones IPv6</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">Formato hexadecimal de 128 bits, reglas de compresión, GUA, LLA y SLAAC / DHCPv6.</p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Abrir guía interactiva</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-slate-800 border-t border-slate-700 py-6 px-4 text-center text-xs text-slate-400">
+    <p>Portal Académico Interactivo de Redes • Diseñado para Docencia e Instrucción Práctica</p>
+  </footer>
+
+  <script>
+    function filterModules() {
+      const query = document.getElementById('search-mod').value.toLowerCase();
+      const cards = document.querySelectorAll('.module-card');
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        const desc = card.querySelector('p').innerText.toLowerCase();
+        const modNum = card.querySelector('span').innerText.toLowerCase();
+
+        if (title.includes(query) || desc.includes(query) || modNum.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

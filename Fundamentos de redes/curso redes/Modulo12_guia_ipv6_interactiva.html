@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 12: Asignación de Direcciones IPv6 - Guía Interactiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg border border-indigo-500/20">
+          <i class="ph ph-globe text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Módulo 12: Asignación de Direcciones IPv6</h1>
+          <p class="text-xs text-slate-400">Fundamentos de Redes • GUA, LLA, SLAAC y DHCPv6</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 bg-indigo-950 text-indigo-300 border border-indigo-800 rounded-full text-xs font-semibold">
+        CCNA - Módulo 12
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-2">
+      <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 sticky top-24">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">Contenido</h2>
+        <nav class="space-y-1 text-sm">
+          <a href="#problemas" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">12.1 Transición a IPv6</a>
+          <a href="#reglas" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">12.2 Reglas de Formato IPv6</a>
+          <a href="#tipos" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">12.3 Tipos (GUA y LLA)</a>
+          <a href="#slaac" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">12.5 SLAAC y DHCPv6</a>
+          <a href="#evaluacion" class="block px-3 py-2 rounded-lg text-indigo-400 font-medium hover:bg-slate-700 transition-colors">Autoevaluación</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <div class="lg:col-span-3 space-y-12">
+
+      <!-- Section 12.1 & 12.2 -->
+      <section id="reglas" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-text-columns text-2xl text-indigo-400"></i>
+          <h2 class="text-2xl font-bold text-white">12.2 Reglas de Compresión de Direcciones IPv6</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Las direcciones IPv6 son largas, pero se pueden abreviar omitiendo ceros a la izquierda y agrupando bloques consecutivos de ceros con <code class="text-indigo-400 font-mono">::</code>.
+        </p>
+
+        <!-- IPv6 Compressor Tool -->
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-4">
+          <h3 class="text-sm font-semibold text-slate-300">Demostrador de Formato IPv6</h3>
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400">Dirección Completa de Ejemplo:</label>
+            <div class="p-3 bg-slate-950 rounded-lg font-mono text-xs text-slate-300 border border-slate-800">
+              2001:0db8:0000:0000:0000:0000:0000:0001
+            </div>
+          </div>
+          <div class="space-y-2">
+            <label class="text-xs text-slate-400">Formato Comprimido Válido:</label>
+            <div class="p-3 bg-indigo-950/40 rounded-lg font-mono text-sm text-indigo-300 border border-indigo-800/50">
+              2001:db8::1
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 12.3 -->
+      <section id="tipos" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-shield text-2xl text-indigo-400"></i>
+          <h2 class="text-2xl font-bold text-white">12.3 Tipos de Unidifusión: GUA y LLA</h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-indigo-400 text-sm">GUA (Global Unicast)</h3>
+            <p class="text-xs text-slate-400">Dirección pública global enrutable en internet. Comienza típicamente con prefijo <code class="text-white">2000::/3</code>.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-indigo-400 text-sm">LLA (Link-Local)</h3>
+            <p class="text-xs text-slate-400">Obligatoria para comunicación local en el enlace. Inicia siempre con el prefijo <code class="text-white">fe80::/10</code>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 12.5 -->
+      <section id="slaac" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-cpu text-2xl text-indigo-400"></i>
+          <h2 class="text-2xl font-bold text-white">12.5 Métodos de Asignación Dinámica</h2>
+        </div>
+        <ul class="list-disc list-inside text-xs text-slate-300 space-y-2">
+          <li><b>SLAAC (Sin Estado):</b> El host genera su propia dirección usando el prefijo del router y su propia dirección MAC modificada (EUI-64) o aleatoria.</li>
+          <li><b>DHCPv6 Sin Estado:</b> SLAAC configura la IP y el router, pero DHCPv6 entrega los servidores DNS.</li>
+          <li><b>DHCPv6 Con Estado:</b> Un servidor central asigna y administra por completo la dirección IP y parámetros de los clientes.</li>
+        </ul>
+      </section>
+
+      <!-- Quiz -->
+      <section id="evaluacion" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-check-square-offset text-2xl text-indigo-400"></i>
+          <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 12</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3">
+            <p class="text-sm font-semibold text-white">1. ¿Cuál es el prefijo estándar que identifica a una dirección de Enlace Local (*Link-Local Address*) en IPv6?</p>
+            <div class="space-y-2 text-xs">
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) 2000::/3</button>
+              <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) fe80::/10</button>
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) ff00::/8</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    function checkQuiz(btn, isCorrect) {
+      const feedback = btn.parentElement.nextElementSibling;
+      feedback.classList.remove('hidden', 'bg-emerald-950', 'text-emerald-300', 'bg-rose-950', 'text-rose-300');
+      if (isCorrect) {
+        feedback.classList.add('bg-emerald-950', 'text-emerald-300');
+        feedback.innerText = '¡Correcto! Las direcciones Link-Local en IPv6 comienzan siempre con el prefijo fe80::/10.';
+      } else {
+        feedback.classList.add('bg-rose-950', 'text-rose-300');
+        feedback.innerText = 'Incorrecto. Inténtalo de nuevo.';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Campus Virtual - Portal de Cursos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-indigo-500/10 text-indigo-400 rounded-lg border border-indigo-500/20">
+          <i class="ph ph-student text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Mi Campus Virtual</h1>
+          <p class="text-xs text-slate-400">Portal Académico Interactivo</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="bg-slate-800/50 border-b border-slate-800 py-12 px-4 text-center">
+    <div class="max-w-3xl mx-auto space-y-3">
+      <h2 class="text-3xl font-extrabold text-white">Catálogo de Cursos Interactivos</h2>
+      <p class="text-sm text-slate-400">
+        Selecciona una asignatura para acceder a los módulos de estudio, simuladores prácticos y autoevaluaciones en línea.
+      </p>
+    </div>
+  </section>
+
+  <!-- Cursos Grid -->
+  <main class="max-w-7xl mx-auto px-4 py-12 flex-1 w-full">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Curso 1: Fundamentos de Redes -->
+      <a href="./Fundamentos de redes/curso redes/index.html" class="bg-slate-800 hover:bg-slate-750 p-6 rounded-2xl border border-slate-700 hover:border-cyan-500/50 transition-all shadow-lg flex flex-col justify-between group">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="px-2.5 py-1 bg-cyan-950 text-cyan-300 border border-cyan-800 rounded-full text-xs font-semibold">CCNA</span>
+            <i class="ph ph-network text-slate-500 group-hover:text-cyan-400 text-2xl transition-colors"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">Fundamentos de Redes</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Curso completo de 12 módulos con simuladores CLI Cisco, arquitectura de red, direccionamiento IPv4/IPv6 y subnetting VLSM.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 flex items-center justify-between text-xs text-cyan-400 font-medium">
+          <span>Ingresar al curso</span>
+          <i class="ph ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+        </div>
+      </a>
+
+      <!-- Curso 2: Programación -->
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 opacity-90 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="px-2.5 py-1 bg-emerald-950 text-emerald-300 border border-emerald-800 rounded-full text-xs font-semibold">Software</span>
+            <i class="ph ph-code text-slate-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Programación</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Lógica de programación, desarrollo de interfaces gráficas cross-platform y estructuras de datos aplicadas.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs text-emerald-400 font-medium">
+          <span>Próximamente</span>
+        </div>
+      </div>
+
+      <!-- Curso 3: Ciberseguridad -->
+      <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 opacity-90 flex flex-col justify-between">
+        <div class="space-y-4">
+          <div class="flex justify-between items-center">
+            <span class="px-2.5 py-1 bg-amber-950 text-amber-300 border border-amber-800 rounded-full text-xs font-semibold">Seguridad</span>
+            <i class="ph ph-shield-check text-slate-500 text-2xl"></i>
+          </div>
+          <h3 class="text-xl font-bold text-white">Ciberseguridad</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Fundamentos de seguridad informática, mitigación de amenazas, protección en aplicaciones y análisis de vulnerabilidades.
+          </p>
+        </div>
+        <div class="mt-6 pt-4 border-t border-slate-700/60 text-xs text-amber-400 font-medium">
+          <span>Próximamente</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="bg-slate-800 border-t border-slate-700 py-6 px-4 text-center text-xs text-slate-400">
+    <p>Campus Virtual • Portal de Aprendizaje e Instrucción Técnica</p>
+  </footer>
+
+</body>
+</html>

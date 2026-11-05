@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Módulo 6: Capa de Enlace de Datos | Fundamentos de Redes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Google Fonts Inter & JetBrains Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        brand: {
+                            blue: '#2563eb',
+                            cyan: '#06b6d4',
+                            darkBlue: '#1e3a8a',
+                            accent: '#38bdf8',
+                            emerald: '#10b981'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-blue selection:text-white">
+
+    <!-- Progress bar -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-800 z-50">
+        <div id="scrollProgress" class="h-full bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-emerald w-0 transition-all duration-150"></div>
+    </div>
+
+    <!-- Header Top Navigation -->
+    <header class="sticky top-0 bg-navy-900/95 backdrop-blur-md text-white shadow-xl z-40 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-tr from-brand-blue to-brand-cyan p-2.5 rounded-xl shadow-md text-white">
+                        <i class="ph ph-link-simple text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs font-semibold text-brand-accent tracking-wider uppercase">Fundamentos de Redes • CCNA</span>
+                        <h1 class="text-lg font-bold leading-tight text-white">Módulo 6: Capa de Enlace de Datos</h1>
+                    </div>
+                </div>
+
+                <!-- Buscador Rápido -->
+                <div class="relative flex-1 max-w-xs hidden md:block">
+                    <i class="ph ph-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="searchInput" placeholder="Buscar (ej. CSMA/CD, MAC, Trama)..." 
+                        class="w-full bg-slate-800 text-sm text-slate-100 pl-9 pr-4 py-2 rounded-lg border border-slate-700 focus:outline-none focus:border-brand-cyan transition-colors">
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileNavToggle" class="md:hidden text-2xl p-2 text-slate-300 hover:text-white">
+                    <i class="ph ph-list"></i>
+                </button>
+            </div>
+
+            <!-- Tabs Desktop -->
+            <nav class="hidden md:flex space-x-2 overflow-x-auto pb-2 pt-1 no-scrollbar border-t border-slate-800/80" id="desktopNavTabs">
+                <!-- Generado dinámicamente por JS -->
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer Nav -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-slate-950/80 z-50 hidden md:hidden backdrop-blur-sm">
+        <div class="bg-navy-900 w-4/5 max-w-xs h-full p-6 text-white shadow-2xl flex flex-col justify-between overflow-y-auto border-r border-slate-800">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-slate-800 mb-4">
+                    <h2 class="font-bold text-lg text-brand-accent">Navegación Módulo 6</h2>
+                    <button id="closeDrawer" class="text-2xl text-slate-400 hover:text-white"><i class="ph ph-x"></i></button>
+                </div>
+                <div class="space-y-2" id="mobileNavItems"></div>
+            </div>
+            <div class="pt-6 border-t border-slate-800 text-xs text-slate-400 text-center">
+                Curso CCNA - Guía de Enlace de Datos
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Layout -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            
+            <!-- Sidebar Indice de Subtemas -->
+            <aside class="lg:col-span-1 hidden lg:block">
+                <div class="sticky top-28 bg-slate-900 p-5 rounded-2xl shadow-lg border border-slate-800">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4 flex items-center gap-2">
+                        <i class="ph ph-list-bullets text-base text-brand-cyan"></i> Índice del Tema
+                    </h3>
+                    <nav id="subtopicSidebar" class="space-y-1.5 text-xs">
+                        <!-- JS population -->
+                    </nav>
+
+                    <div class="mt-6 pt-6 border-t border-slate-800">
+                        <div class="bg-slate-800/80 border border-slate-700/60 rounded-xl p-3.5 text-xs text-slate-300 flex items-start gap-2.5">
+                            <i class="ph ph-lightbulb text-xl text-amber-400 shrink-0 mt-0.5"></i>
+                            <div>
+                                <span class="font-bold text-white block mb-0.5">Tip Docente:</span>
+                                Utiliza las demostraciones interactivas de tramas y saltos de router para que los alumnos entiendan por qué la dirección MAC cambia y la dirección IP no.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="lg:col-span-3 space-y-8" id="contentArea">
+                <!-- Se renderiza por JS -->
+            </main>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 text-slate-400 text-sm py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center sm:flex sm:justify-between sm:items-center">
+            <p class="mb-4 sm:mb-0">Fundamentos de Redes • <strong>Módulo 6: Capa de Enlace de Datos</strong></p>
+            <p class="text-xs text-slate-500">Diseñado para proyección en aula y aprendizaje autónomo en cualquier dispositivo.</p>
+        </div>
+    </footer>
+
+    <!-- JS Logic -->
+    <script>
+        const topicsData = [
+            {
+                id: "t6_0_1",
+                num: "6.0 - 6.1",
+                title: "Propósito de la Capa de Enlace de Datos",
+                shortTitle: "6.1 Propósito",
+                icon: "ph-shield-check",
+                subtopics: [
+                    { id: "s6_0", title: "6.0 Introducción al Nivel 2 OSI" },
+                    { id: "s6_1_1", title: "6.1.1 La capa de enlace de datos" },
+                    { id: "s6_1_2", title: "6.1.2 Subcapas IEEE 802 (LLC y MAC)" },
+                    { id: "s6_1_3", title: "6.1.3 Provisión de acceso a los medios" },
+                    { id: "s6_1_4", title: "6.1.4 Estándares de Enlace de Datos" },
+                    { id: "s6_1_5", title: "6.1.5 Compruebe su comprensión" }
+                ],
+                content: `
+                    <div class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-blue-500/10 text-brand-accent text-xs font-bold px-3 py-1 rounded-full border border-blue-500/20 uppercase">Tema 6.0 & 6.1</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Propósito de la Capa de Enlace de Datos</h2>
+                        </div>
+
+                        <!-- 6.0 Introduccion -->
+                        <div id="s6_0" class="scroll-mt-28 mb-8">
+                            <p class="text-slate-300 leading-relaxed text-base mb-4">
+                                La <strong>Capa de Enlace de Datos (Capa 2 del modelo OSI)</strong> es el puente fundamental que conecta el software de red (Capa 3 - IP) con el hardware físico subyacente (Capa 1 - Cables, Fibra, Aire).
+                            </p>
+
+                            <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-5 mb-6 text-sm text-slate-300">
+                                <h4 class="font-bold text-brand-cyan mb-2 flex items-center gap-2">
+                                    <i class="ph ph-truck text-xl"></i> Analogía Didáctica: El Sobre y los Distintos Medios de Transporte
+                                </h4>
+                                <p class="leading-relaxed">
+                                    Imagina que envías un paquete desde Tokio a Madrid. El contenido de la carta es el <em>Paquete IP</em> (Capa 3). Sin embargo, para viajar, el paquete primero entra en un <strong>Camión local</strong> (Trama Ethernet sobre cobre). Luego se desembarca y se coloca dentro de un <strong>Contenedor de Avión</strong> (Trama de Fibra Óptica WAN), y finalmente llega en una <strong>Furgoneta de Reparto Inalámbrica</strong> (Wi-Fi). 
+                                    <br><br>
+                                    La Capa de Enlace de Datos es la encargada de <strong>empaquetar y desempaquetar el mensaje en cada tramo específico de la ruta</strong> según el medio físico sobre el que va a viajar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 6.1.1 -->
+                        <div id="s6_1_1" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="ph ph-cpu text-brand-blue"></i> 6.1.1 Funciones clave de la Capa 2
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/60">
+                                    <h4 class="font-bold text-brand-accent text-sm mb-1">1. Encapsulamiento en Tramas (Framing)</h4>
+                                    <p class="text-xs text-slate-400">Toma el paquete de Capa 3 y le agrega un Encabezado (Header) y un Tráiler (Trailer) para crear una Trama (Frame).</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/60">
+                                    <h4 class="font-bold text-brand-accent text-sm mb-1">2. Direccionamiento Físico (MAC)</h4>
+                                    <p class="text-xs text-slate-400">Asigna direcciones físicas únicas de hardware para identificar al emisor y al receptor directo en el mismo segmento de red.</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/60">
+                                    <h4 class="font-bold text-brand-accent text-sm mb-1">3. Control de Acceso al Medio (MAC)</h4>
+                                    <p class="text-xs text-slate-400">Establece las reglas para saber cuándo un dispositivo tiene permitido transmitir por el cable o aire sin interferir.</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700/60">
+                                    <h4 class="font-bold text-brand-accent text-sm mb-1">4. Detección de Errores (FCS / CRC)</h4>
+                                    <p class="text-xs text-slate-400">Inserta un código matemático en el tráiler para verificar si la trama se dañó durante la transmisión física.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.1.2 Subcapas IEEE 802 -->
+                        <div id="s6_1_2" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="ph ph-layers text-brand-blue"></i> 6.1.2 Subcapas de Enlace de Datos (IEEE 802 LAN/MAN)
+                            </h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                En las redes LAN (Ethernet y Wi-Fi), el estándar IEEE divide la Capa 2 en dos subcapas independientes para separar el software del hardware:
+                            </p>
+
+                            <div class="space-y-4">
+                                <div class="p-5 bg-gradient-to-r from-blue-950/40 to-slate-900 border border-blue-800/60 rounded-xl">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-bold text-brand-accent text-base">Subcapa LLC (Logical Link Control - IEEE 802.2)</h4>
+                                        <span class="text-xs font-mono bg-blue-900/60 text-blue-300 px-2.5 py-0.5 rounded">Capa Superior (Software)</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300 leading-relaxed">
+                                        Se comunica directamente con la Capa de Red (Capa 3 IP). Coloca información en la trama que identifica qué protocolo de capa superior (IPv4 o IPv6) está empaquetado. <strong>Permite que Ethernet y Wi-Fi usen los mismos protocolos de red.</strong>
+                                    </p>
+                                </div>
+
+                                <div class="p-5 bg-gradient-to-r from-cyan-950/40 to-slate-900 border border-cyan-800/60 rounded-xl">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="font-bold text-brand-cyan text-base">Subcapa MAC (Media Access Control - IEEE 802.3 / 802.11)</h4>
+                                        <span class="text-xs font-mono bg-cyan-900/60 text-cyan-300 px-2.5 py-0.5 rounded">Capa Inferior (Hardware)</span>
+                                    </div>
+                                    <p class="text-xs text-slate-300 leading-relaxed">
+                                        Se comunica directamente con la Capa Física. Es responsable del direccionamiento físico (Dirección MAC), delimitación de tramas y control de acceso al medio según la tecnología específica (Ethernet de cobre, fibra o Wi-Fi).
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.1.3 y 6.1.4 -->
+                        <div id="s6_1_3" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4">6.1.3 & 6.1.4 Provisión de Acceso y Organismos de Estándares</h3>
+                            <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                                A medida que una IP viaja por la red global, se encapsula en tramas completamente diferentes en cada segmento. La Capa de Enlace de Datos está definida por organizaciones abiertas de ingeniería:
+                            </p>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <div class="bg-slate-800/60 border border-slate-700 p-3 rounded-lg text-center">
+                                    <span class="font-bold text-brand-accent block text-sm">IEEE</span>
+                                    <span class="text-[11px] text-slate-400">802.3 (Ethernet) / 802.11 (Wi-Fi)</span>
+                                </div>
+                                <div class="bg-slate-800/60 border border-slate-700 p-3 rounded-lg text-center">
+                                    <span class="font-bold text-brand-accent block text-sm">ITU-T</span>
+                                    <span class="text-[11px] text-slate-400">G.hn, DSL, Telecomunicaciones</span>
+                                </div>
+                                <div class="bg-slate-800/60 border border-slate-700 p-3 rounded-lg text-center">
+                                    <span class="font-bold text-brand-accent block text-sm">ISO</span>
+                                    <span class="text-[11px] text-slate-400">HDLC y Estándares Internacionales</span>
+                                </div>
+                                <div class="bg-slate-800/60 border border-slate-700 p-3 rounded-lg text-center">
+                                    <span class="font-bold text-brand-accent block text-sm">ANSI</span>
+                                    <span class="text-[11px] text-slate-400">Interfaces y Conectores de Datos</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.1.5 Quiz -->
+                        <div id="s6_1_5" class="scroll-mt-28 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="ph ph-check-circle text-brand-emerald"></i> 6.1.5 Compruebe su comprensión: Propósito
+                            </h3>
+                            ${createInteractiveQuiz("q6_1_1",
+                                "1. ¿Qué subcapa de la Capa de Enlace de Datos se encarga de comunicarse directamente con la Capa de Red (IP)?",
+                                ["Subcapa MAC (Media Access Control)", "Subcapa LLC (Logical Link Control)", "Subcapa PHY (Capa Física)", "Subcapa FCS"],
+                                1,
+                                "La subcapa LLC (IEEE 802.2) sirve de interfaz entre la Capa 3 IP y la subcapa MAC de hardware."
+                            )}
+                            ${createInteractiveQuiz("q6_1_2",
+                                "2. ¿Cuál es el campo del tráiler de Capa 2 utilizado para verificar si la trama sufrió errores durante la transmisión?",
+                                ["Dirección MAC Destino", "Preámbulo", "Secuencia de Verificación de Trama (FCS / CRC)", "EtherType"],
+                                2,
+                                "El FCS contiene un valor calculado mediante CRC (Cyclic Redundancy Check) para validar la integridad de la trama."
+                            )}
+                        </div>
+
+                    </div>
+                `
+            },
+            {
+                id: "t6_2",
+                num: "6.2",
+                title: "Topologías y Control de Acceso",
+                shortTitle: "6.2 Topologías",
+                icon: "ph-tree-structure",
+                subtopics: [
+                    { id: "s6_2_1", title: "6.2.1 Topología física y lógica" },
+                    { id: "s6_2_2", title: "6.2.2 Topologías WAN" },
+                    { id: "s6_2_3", title: "6.2.3 Topología WAN Punto a Punto" },
+                    { id: "s6_2_4", title: "6.2.4 Topologías LAN" },
+                    { id: "s6_2_5", title: "6.2.5 Dúplex Completo vs Semidúplex" },
+                    { id: "s6_2_6", title: "6.2.6 Métodos de control de acceso" },
+                    { id: "s6_2_7", title: "6.2.7 Acceso por contención: CSMA/CD" },
+                    { id: "s6_2_8", title: "6.2.8 Acceso por contención: CSMA/CA" },
+                    { id: "s6_2_9", title: "6.2.9 Compruebe su comprensión" }
+                ],
+                content: `
+                    <div class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-blue-500/10 text-brand-accent text-xs font-bold px-3 py-1 rounded-full border border-blue-500/20 uppercase">Tema 6.2</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Topologías y Control de Acceso al Medio</h2>
+                        </div>
+
+                        <!-- 6.2.1 -->
+                        <div id="s6_2_1" class="scroll-mt-28 mb-8">
+                            <h3 class="text-xl font-bold text-white mb-3">6.2.1 Topología Física vs. Topología Lógica</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700">
+                                    <h4 class="font-bold text-brand-accent text-base mb-2"><i class="ph ph-screencast"></i> Topología Física</h4>
+                                    <p class="text-xs text-slate-300 leading-relaxed">Muestra la disposición física real de los cables, puertos, gabinetes de telecomunicaciones y dispositivos terminales en la infraestructura tangible.</p>
+                                </div>
+                                <div class="bg-slate-800/60 p-5 rounded-xl border border-slate-700">
+                                    <h4 class="font-bold text-brand-cyan text-base mb-2"><i class="ph ph-arrows-merge"></i> Topología Lógica</h4>
+                                    <p class="text-xs text-slate-300 leading-relaxed">Define la forma en que las tramas viajan a través de la red de un nodo a otro (rutas lógicas, direccionamiento IP y esquema de transmisión).</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.2.2 & 6.2.3 WAN -->
+                        <div id="s6_2_2" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4">6.2.2 & 6.2.3 Topologías de Redes WAN</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                                    <span class="text-xs font-bold text-brand-accent block mb-1">Punto a Punto</span>
+                                    <p class="text-xs text-slate-400">Conexión directa entre dos nodos de red. Es la más simple. El encabezado de trama no necesita direcciones MAC complejas.</p>
+                                </div>
+                                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                                    <span class="text-xs font-bold text-brand-accent block mb-1">Hub and Spoke (Estrella WAN)</span>
+                                    <p class="text-xs text-slate-400">Un sitio central (Hub) se conecta a múltiples sitios remotos (Spokes) mediante enlaces punto a punto.</p>
+                                </div>
+                                <div class="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
+                                    <span class="text-xs font-bold text-brand-accent block mb-1">Malla Completa (Full Mesh)</span>
+                                    <p class="text-xs text-slate-400">Cada nodo está directamente conectado a todos los demás. Alta redundancia pero costo muy elevado.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.2.5 WIDGET INTERACTIVO DUPLEX -->
+                        <div id="s6_2_5" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-3">6.2.5 Comunicación Dúplex Completo (Full-Duplex) vs. Semidúplex (Half-Duplex)</h3>
+                            <p class="text-xs text-slate-300 mb-4">Selecciona un modo para probar la simulación interactiva de transferencia de datos:</p>
+
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl mb-6">
+                                <div class="flex items-center justify-between mb-6 flex-wrap gap-3">
+                                    <div class="flex items-center gap-2">
+                                        <i class="ph ph-arrows-left-right text-brand-cyan text-xl"></i>
+                                        <span class="font-bold text-sm text-white">Simulador de Transmisión Dúplex</span>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button onclick="setDuplexMode('full')" id="btnFullDuplex" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-blue text-white shadow">Dúplex Completo (Full-Duplex)</button>
+                                        <button onclick="setDuplexMode('half')" id="btnHalfDuplex" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-400 hover:text-white">Semidúplex (Half-Duplex)</button>
+                                    </div>
+                                </div>
+
+                                <div id="duplexDisplay" class="bg-slate-900 p-6 rounded-xl border border-slate-800 text-center">
+                                    <!-- Rendered dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.2.7 & 6.2.8 SIMULADOR CSMA/CD vs CSMA/CA -->
+                        <div id="s6_2_7" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-3">6.2.7 & 6.2.8 Demostración de Métodos de Contención (CSMA/CD vs. CSMA/CA)</h3>
+                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                En medios compartidos, múltiples equipos compiten por transmitir. Examina los simuladores animados de ambos métodos:
+                            </p>
+
+                            <!-- CSMA/CD Simulator -->
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="font-bold text-sm text-brand-accent flex items-center gap-2">
+                                        <i class="ph ph-warning-octagon"></i> CSMA/CD (Redes Cableadas - Ethernet con Hubs)
+                                    </h4>
+                                    <button onclick="runCSMACD()" class="px-3 py-1.5 bg-brand-blue hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all">Simular Colisión y Recuperación</button>
+                                </div>
+
+                                <div id="csmacdBox" class="bg-slate-900 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2 min-h-[120px]">
+                                    <p class="text-slate-400">// Presiona "Simular" para ejecutar el ciclo CSMA/CD...</p>
+                                </div>
+                            </div>
+
+                            <!-- CSMA/CA Explanation -->
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl">
+                                <h4 class="font-bold text-sm text-brand-cyan mb-3 flex items-center gap-2">
+                                    <i class="ph ph-wifi-high"></i> CSMA/CA (Redes Inalámbricas - Wi-Fi IEEE 802.11)
+                                </h4>
+                                <p class="text-xs text-slate-300 leading-relaxed mb-3">
+                                    En redes inalámbricas **no se pueden detectar colisiones mientras se transmite**. Por eso se usa <strong>Evasión de Colisiones (Avoidance)</strong> utilizando reservas del canal (RTS / CTS):
+                                </p>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                                        <strong class="text-brand-accent block mb-1">1. RTS (Request to Send)</strong>
+                                        <span class="text-slate-400">El cliente solicita permiso al Punto de Acceso indicando la duración.</span>
+                                    </div>
+                                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                                        <strong class="text-brand-cyan block mb-1">2. CTS (Clear to Send)</strong>
+                                        <span class="text-slate-400">El AP responde concediendo tiempo exclusivo. Otros clientes pausan transmisiones.</span>
+                                    </div>
+                                    <div class="p-3 bg-slate-900 border border-slate-800 rounded-lg">
+                                        <strong class="text-brand-emerald block mb-1">3. Transmisión Segura</strong>
+                                        <span class="text-slate-400">El cliente transmite la trama sin riesgo de colisión en el aire.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.2.9 Quiz -->
+                        <div id="s6_2_9" class="scroll-mt-28 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="ph ph-check-circle text-brand-emerald"></i> 6.2.9 Compruebe su comprensión: Topologías
+                            </h3>
+                            ${createInteractiveQuiz("q6_2_1",
+                                "1. ¿Qué ocurre en una red Ethernet semidúplex cuando dos dispositivos transmiten exactamente al mismo tiempo?",
+                                ["Ambas tramas llegan más rápido", "Se produce una colisión de señales (CSMA/CD)", "El switch convierte el tráfico a Wi-Fi", "Se duplica el ancho de banda"],
+                                1,
+                                "En semidúplex, la transmisión simultánea genera una colisión detectada por CSMA/CD, deteniendo el tráfico e iniciando un backoff aleatorio."
+                            )}
+                        </div>
+
+                    </div>
+                `
+            },
+            {
+                id: "t6_3",
+                num: "6.3",
+                title: "Trama de Enlace de Datos",
+                shortTitle: "6.3 La Trama Capa 2",
+                icon: "ph-frame-corners",
+                subtopics: [
+                    { id: "s6_3_1", title: "6.3.1 Estructura general de la trama" },
+                    { id: "s6_3_2", title: "6.3.2 Campos de una trama Ethernet II" },
+                    { id: "s6_3_3", title: "6.3.3 Direcciones MAC y Saltos de Router" },
+                    { id: "s6_3_4", title: "6.3.4 Tramas LAN vs WAN" },
+                    { id: "s6_3_5", title: "6.3.5 Compruebe su comprensión" }
+                ],
+                content: `
+                    <div class="bg-slate-900 rounded-2xl p-6 sm:p-8 border border-slate-800 shadow-xl mb-6">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-blue-500/10 text-brand-accent text-xs font-bold px-3 py-1 rounded-full border border-blue-500/20 uppercase">Tema 6.3</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white">La Trama de Enlace de Datos</h2>
+                        </div>
+
+                        <!-- 6.3.1 & 6.3.2 VISUALIZADOR INTERACTIVO DE TRAMA -->
+                        <div id="s6_3_2" class="scroll-mt-28 mb-8">
+                            <h3 class="text-xl font-bold text-white mb-3">6.3.1 & 6.3.2 Inspección Interactiva de la Trama Ethernet II</h3>
+                            <p class="text-xs text-slate-300 mb-4">Haz clic sobre cualquier campo de la trama para inspeccionar su función técnica exacta:</p>
+
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl mb-6">
+                                <!-- Frame header layout -->
+                                <div class="grid grid-cols-12 gap-1.5 text-center font-mono text-xs mb-4" id="frameFieldsContainer">
+                                    <div onclick="inspectFrameField('preamble')" class="col-span-2 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">8 Bytes</span>
+                                        <strong class="text-slate-200">Preámbulo/SFD</strong>
+                                    </div>
+                                    <div onclick="inspectFrameField('dstMac')" class="col-span-3 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">6 Bytes</span>
+                                        <strong class="text-brand-accent">MAC Destino</strong>
+                                    </div>
+                                    <div onclick="inspectFrameField('srcMac')" class="col-span-3 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">6 Bytes</span>
+                                        <strong class="text-brand-cyan">MAC Origen</strong>
+                                    </div>
+                                    <div onclick="inspectFrameField('ethertype')" class="col-span-1 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">2B</span>
+                                        <strong class="text-amber-400">Tipo</strong>
+                                    </div>
+                                    <div onclick="inspectFrameField('payload')" class="col-span-2 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">46-1500B</span>
+                                        <strong class="text-emerald-400">Datos (IP)</strong>
+                                    </div>
+                                    <div onclick="inspectFrameField('fcs')" class="col-span-1 cursor-pointer bg-slate-800 hover:bg-brand-blue p-3 rounded-lg border border-slate-700 transition-all">
+                                        <span class="block text-[10px] text-slate-400">4B</span>
+                                        <strong class="text-rose-400">FCS</strong>
+                                    </div>
+                                </div>
+
+                                <!-- Dynamic Field Details Box -->
+                                <div id="frameDetailsBox" class="bg-slate-900 p-5 rounded-xl border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                                    <p class="text-slate-400 font-mono">// Haz clic en uno de los campos superiores para inspeccionar su contenido.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.3.3 DEMO SALTO DE ROUTERS MAC VS IP -->
+                        <div id="s6_3_3" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                                <i class="ph ph-git-commit text-brand-cyan"></i> 6.3.3 Demostración: ¿Cómo cambian las Direcciones MAC en cada Salto?
+                            </h3>
+                            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                                <strong>Regla de Oro en Redes:</strong> La dirección <strong>IP de Origen y Destino NUNCA cambia</strong> de extremo a extremo. Sin embargo, las <strong>Direcciones MAC de Origen y Destino CAMBIAN en cada router</strong> (salto de Capa 2).
+                            </p>
+
+                            <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800 shadow-xl mb-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <span class="text-xs font-bold text-slate-400 uppercase">Simulador de Viaje de Paquete a través de 2 Routers</span>
+                                    <button onclick="stepRouterHop()" class="px-3.5 py-1.5 bg-brand-blue hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all">Avanzar Siguiente Salto ➔</button>
+                                </div>
+
+                                <div id="routerHopDisplay" class="bg-slate-900 p-5 rounded-xl border border-slate-800 font-mono text-xs space-y-3">
+                                    <!-- Rendered dynamically -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6.3.4 Formatos de Tramas LAN vs WAN -->
+                        <div id="s6_3_4" class="scroll-mt-28 mb-8 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4">6.3.4 Comparativa de Formatos de Tramas LAN y WAN</h3>
+
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left text-xs border-collapse">
+                                    <thead>
+                                        <tr class="bg-slate-950 text-white font-bold border-b border-slate-800">
+                                            <th class="p-3">Protocolo de Trama</th>
+                                            <th class="p-3">Entorno de Red</th>
+                                            <th class="p-3">Direccionamiento Capa 2</th>
+                                            <th class="p-3">Características Clave</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-slate-800 text-slate-300 font-mono">
+                                        <tr>
+                                            <td class="p-3 font-bold text-brand-accent">Ethernet II (IEEE 802.3)</td>
+                                            <td class="p-3 font-sans">LAN Cableada</td>
+                                            <td class="p-3">MAC Origen y MAC Destino (48 bits)</td>
+                                            <td class="p-3 font-sans">Estándar mundial para redes LAN. Usa EtherType.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold text-brand-cyan">Wi-Fi (IEEE 802.11)</td>
+                                            <td class="p-3 font-sans">WLAN Inalámbrica</td>
+                                            <td class="p-3">Hasta 4 Direcciones MAC</td>
+                                            <td class="p-3 font-sans">Incluye campos de gestión y control de radiofrecuencia.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold text-brand-emerald">PPP (Point-to-Point)</td>
+                                            <td class="p-3 font-sans">WAN Punto a Punto</td>
+                                            <td class="p-3">No requiere dirección destino (0xFF)</td>
+                                            <td class="p-3 font-sans">Establece sesiones, autentica (PAP/CHAP) y comprime.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold text-amber-400">HDLC</td>
+                                            <td class="p-3 font-sans">WAN Enlaces Serie</td>
+                                            <td class="p-3">Dirección de transmisión simplificada</td>
+                                            <td class="p-3 font-sans">Estándar propietario de Cisco o ISO para líneas dedicadas.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- 6.3.5 Quiz -->
+                        <div id="s6_3_5" class="scroll-mt-28 pt-6 border-t border-slate-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <i class="ph ph-check-circle text-brand-emerald"></i> 6.3.5 Compruebe su comprensión: La Trama
+                            </h3>
+                            ${createInteractiveQuiz("q6_3_1",
+                                "1. Cuando un paquete IP viaja desde una PC origen a un Servidor destino a través de 3 routers, ¿qué direcciones cambian en cada salto?",
+                                ["Las direcciones IP de origen y destino", "Únicamente las direcciones MAC de origen y destino", "Tanto las IP como las MAC en cada router", "Ninguna dirección cambia"],
+                                1,
+                                "Las direcciones IP permanecen constantes de extremo a extremo. Las direcciones MAC se reescriben en cada router para adaptarse al siguiente tramo de enlace físico."
+                            )}
+                        </div>
+
+                    </div>
+                `
+            }
+        ];
+
+        // HELPER PREGUNTAS INTERACTIVAS
+        function createInteractiveQuiz(id, question, options, correctIndex, explanation) {
+            const optionsHTML = options.map((opt, idx) => `
+                <button onclick="checkQuizAnswer('${id}', ${idx}, ${correctIndex})" 
+                    class="quiz-opt-${id} w-full text-left p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs font-medium text-slate-300 hover:bg-slate-800 transition-all flex items-center justify-between">
+                    <span>${opt}</span>
+                    <i class="ph ph-circle text-base text-slate-600 status-icon"></i>
+                </button>
+            `).join('');
+
+            return `
+                <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-5 mb-4" id="${id}">
+                    <h5 class="font-bold text-white text-sm mb-3">${question}</h5>
+                    <div class="space-y-2 mb-3">
+                        ${optionsHTML}
+                    </div>
+                    <div id="exp-${id}" class="hidden p-3 rounded-xl text-xs leading-relaxed mt-3 border">
+                        <strong>Explicación:</strong> ${explanation}
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkQuizAnswer(quizId, selectedIdx, correctIdx) {
+            const buttons = document.querySelectorAll(`.quiz-opt-${quizId}`);
+            const expEl = document.getElementById(`exp-${quizId}`);
+
+            buttons.forEach((btn, idx) => {
+                btn.disabled = true;
+                const icon = btn.querySelector('.status-icon');
+
+                if (idx === correctIdx) {
+                    btn.classList.add('bg-emerald-950/50', 'border-emerald-800', 'text-emerald-300');
+                    icon.className = "ph ph-check-circle text-base text-emerald-400";
+                } else if (idx === selectedIdx) {
+                    btn.classList.add('bg-rose-950/50', 'border-rose-800', 'text-rose-300');
+                    icon.className = "ph ph-x-circle text-base text-rose-400";
+                }
+            });
+
+            expEl.classList.remove('hidden');
+            if (selectedIdx === correctIdx) {
+                expEl.classList.add('bg-emerald-950/40', 'border-emerald-800/80', 'text-emerald-300');
+            } else {
+                expEl.classList.add('bg-amber-950/40', 'border-amber-800/80', 'text-amber-300');
+            }
+        }
+
+        // SIMULADOR DUPLEX
+        function setDuplexMode(mode) {
+            const btnFull = document.getElementById('btnFullDuplex');
+            const btnHalf = document.getElementById('btnHalfDuplex');
+            const display = document.getElementById('duplexDisplay');
+
+            if (mode === 'full') {
+                btnFull.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-blue text-white shadow";
+                btnHalf.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-400 hover:text-white";
+                display.innerHTML = `
+                    <div class="flex items-center justify-around gap-4">
+                        <div class="text-center">
+                            <i class="ph ph-desktop text-3xl text-brand-accent mb-1"></i>
+                            <span class="block text-xs font-bold text-slate-300">Switch / PC A</span>
+                        </div>
+                        <div class="flex-1 space-y-2">
+                            <div class="bg-emerald-500/20 border border-emerald-500/40 p-2 rounded text-emerald-400 text-xs font-mono">
+                                ➔ Transmitiendo Datos (Tx) a 1 Gbps...
+                            </div>
+                            <div class="bg-cyan-500/20 border border-cyan-500/40 p-2 rounded text-cyan-400 text-xs font-mono">
+                                ⬅ Recibiendo Datos Simultáneos (Rx) a 1 Gbps...
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <i class="ph ph-desktop text-3xl text-brand-cyan mb-1"></i>
+                            <span class="block text-xs font-bold text-slate-300">PC B</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4"><strong>Ventaja:</strong> Sin colisiones. Envío y recepción simultánea por pares de hilos independientes (Switches).</p>
+                `;
+            } else {
+                btnHalf.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-brand-blue text-white shadow";
+                btnFull.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all bg-slate-800 text-slate-400 hover:text-white";
+                display.innerHTML = `
+                    <div class="flex items-center justify-around gap-4">
+                        <div class="text-center">
+                            <i class="ph ph-tree-structure text-3xl text-amber-400 mb-1"></i>
+                            <span class="block text-xs font-bold text-slate-300">Hub / Walkie-Talkie</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="bg-amber-500/20 border border-amber-500/40 p-3 rounded text-amber-300 text-xs font-mono">
+                                ⚠️ Solo 1 canal disponible: Si A y B transmiten a la vez = ¡COLISIÓN!
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4"><strong>Restricción:</strong> Un solo dispositivo a la vez. Requiere algoritmos como CSMA/CD o CSMA/CA.</p>
+                `;
+            }
+        }
+
+        // SIMULADOR CSMA/CD
+        function runCSMACD() {
+            const box = document.getElementById('csmacdBox');
+            box.innerHTML = `
+                <div class="text-cyan-400">1. Escuchando el medio (Carrier Sense)... Libre.</div>
+                <div class="text-brand-accent">2. Host A y Host B inician transmisión simultánea por el bus...</div>
+                <div class="text-rose-400 font-bold">3. 💥 ¡COLISIÓN DETECTADA EN EL CABLE! (Voltaje anómalo)</div>
+                <div class="text-amber-300">4. Se envía señal de Jamming (32 bits) a toda la red para cancelar tramas.</div>
+                <div class="text-slate-400">5. Algoritmo de Backoff Exponencial: A espera 12ms, B espera 45ms (Aleatorio).</div>
+                <div class="text-emerald-400 font-bold">6. Reintento exitoso una vez libre el canal.</div>
+            `;
+        }
+
+        // FIELD INSPECTOR
+        const frameFieldData = {
+            preamble: {
+                title: "Preámbulo y Delimitador de Inicio de Trama (SFD)",
+                size: "8 Bytes (7 Bytes Preámbulo + 1 Byte SFD)",
+                desc: "Sincroniza los relojes entre el transmisor y el receptor. El último byte (SFD: 10101011) le avisa a la tarjeta de red receptor que el siguiente bit corresponde al inicio oficial del encabezado de la trama."
+            },
+            dstMac: {
+                title: "Dirección MAC de Destino",
+                size: "6 Bytes (48 Bits en Hexadecimal)",
+                desc: "Dirección física del dispositivo receptor directo en la misma red LAN local (ej. 00-1A-2B-3C-4D-5E). El switch inspecciona este campo para reenviar la trama únicamente al puerto correcto."
+            },
+            srcMac: {
+                title: "Dirección MAC de Origen",
+                size: "6 Bytes (48 Bits en Hexadecimal)",
+                desc: "Dirección física de la tarjeta de red (NIC) del equipo que creó la trama. El switch la utiliza para aprender dinámicamente en qué puerto físico está conectado cada equipo (Tabla MAC)."
+            },
+            ethertype: {
+                title: "Campo de Tipo (EtherType)",
+                size: "2 Bytes",
+                desc: "Indica qué protocolo de capa superior (Capa 3) está encapsulado dentro del campo de Datos. Ejemplos comunes: 0x0800 = IPv4, 0x86DD = IPv6, 0x0806 = ARP."
+            },
+            payload: {
+                title: "Datos / Carga Útil (Payload IP)",
+                size: "46 a 1500 Bytes (MTU Estándar)",
+                desc: "Contiene el paquete de Capa de Red completo (Encabezado IP + Segmento TCP/UDP + Datos de Aplicación). Si los datos miden menos de 46 bytes, se agregan bytes de relleno (padding)."
+            },
+            fcs: {
+                title: "Secuencia de Verificación de Trama (FCS / CRC)",
+                size: "4 Bytes",
+                desc: "Contiene un número matemático calculado por el emisor mediante el algoritmo CRC (Cyclic Redundancy Check). El receptor vuelve a realizar el cálculo; si los números no coinciden exactamente, la trama dañada se descarta."
+            }
+        };
+
+        function inspectFrameField(fieldKey) {
+            const field = frameFieldData[fieldKey];
+            const detailsBox = document.getElementById('frameDetailsBox');
+            detailsBox.innerHTML = `
+                <div class="flex items-center justify-between mb-2">
+                    <h4 class="font-bold text-white text-sm">${field.title}</h4>
+                    <span class="text-xs font-mono bg-brand-blue/30 text-brand-accent px-2.5 py-0.5 rounded border border-brand-blue/40">${field.size}</span>
+                </div>
+                <p class="text-slate-300">${field.desc}</p>
+            `;
+        }
+
+        // ROUTER HOP SIMULATOR
+        let currentHop = 0;
+        const hopStates = [
+            {
+                step: "Paso 1: PC Origen ➔ Router R1 (LAN Local)",
+                srcIp: "192.168.1.10 (PC)", dstIp: "10.0.0.50 (Servidor Web)",
+                srcMac: "AA:AA:AA:11:11:11 (PC)", dstMac: "BB:BB:BB:22:22:22 (Interfaz Router R1 G0/0)",
+                desc: "La PC sabe que la IP destino está fuera de su red. Encapsula el paquete IP usando como MAC Destino la puerta de enlace (Router R1)."
+            },
+            {
+                step: "Paso 2: Router R1 ➔ Router R2 (Enlace WAN Serie / Fibra)",
+                srcIp: "192.168.1.10 (PC)", dstIp: "10.0.0.50 (Servidor Web)",
+                srcMac: "CC:CC:CC:33:33:33 (R1 Salida)", dstMac: "DD:DD:DD:44:44:44 (R2 Entrada)",
+                desc: "R1 desencapsula la trama, revisa su tabla de enrutamiento IP y REESCRIBE la trama con sus nuevas direcciones MAC para cruzar el enlace WAN hacia R2. ¡Las IP no cambiaron!"
+            },
+            {
+                step: "Paso 3: Router R2 ➔ Servidor Destino (LAN Final)",
+                srcIp: "192.168.1.10 (PC)", dstIp: "10.0.0.50 (Servidor Web)",
+                srcMac: "EE:EE:EE:55:55:55 (R2 Salida)", dstMac: "FF:FF:FF:66:66:66 (Servidor Web)",
+                desc: "R2 entrega la trama final directamente al Servidor. Las Direcciones IP siguieron siendo exactamente las mismas de origen a fin."
+            }
+        ];
+
+        function stepRouterHop() {
+            currentHop = (currentHop + 1) % hopStates.length;
+            renderRouterHop();
+        }
+
+        function renderRouterHop() {
+            const h = hopStates[currentHop];
+            const display = document.getElementById('routerHopDisplay');
+            if (!display) return;
+
+            display.innerHTML = `
+                <div class="text-brand-accent font-bold text-sm mb-1">${h.step}</div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-950 p-3 rounded-lg border border-slate-800">
+                    <div>
+                        <span class="text-slate-500 block text-[10px] uppercase">Capa 3 (Inalterable):</span>
+                        <div class="text-emerald-400">IP Origen: ${h.srcIp}</div>
+                        <div class="text-emerald-400">IP Destino: ${h.dstIp}</div>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block text-[10px] uppercase">Capa 2 (Cambia en cada Salto):</span>
+                        <div class="text-amber-400">MAC Origen: ${h.srcMac}</div>
+                        <div class="text-amber-400">MAC Destino: ${h.dstMac}</div>
+                    </div>
+                </div>
+                <p class="text-slate-400 font-sans text-xs">${h.desc}</p>
+            `;
+        }
+
+        // NAVIGATION LOGIC
+        let currentTopicId = "t6_0_1";
+
+        function renderDesktopNav() {
+            const navContainer = document.getElementById('desktopNavTabs');
+            navContainer.innerHTML = topicsData.map(topic => `
+                <button onclick="selectTopic('${topic.id}')" 
+                    class="nav-tab-btn flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all ${topic.id === currentTopicId ? 'bg-brand-blue text-white shadow' : 'text-slate-400 hover:bg-slate-800 hover:text-white'}">
+                    <i class="ph ${topic.icon} text-base"></i>
+                    <span>${topic.shortTitle}</span>
+                </button>
+            `).join('');
+        }
+
+        function renderMobileNav() {
+            const container = document.getElementById('mobileNavItems');
+            container.innerHTML = topicsData.map(topic => `
+                <button onclick="selectTopic('${topic.id}'); toggleMobileDrawer();" 
+                    class="w-full text-left flex items-center gap-3 p-3 rounded-xl text-sm font-medium ${topic.id === currentTopicId ? 'bg-brand-blue text-white' : 'text-slate-300 hover:bg-slate-800'}">
+                    <i class="ph ${topic.icon} text-lg"></i>
+                    <span>${topic.title}</span>
+                </button>
+            `).join('');
+        }
+
+        function renderSubtopicSidebar(topic) {
+            const container = document.getElementById('subtopicSidebar');
+            container.innerHTML = topic.subtopics.map(sub => `
+                <a href="#${sub.id}" class="block py-1.5 px-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-brand-accent transition-colors font-medium">
+                    ${sub.title}
+                </a>
+            `).join('');
+        }
+
+        function selectTopic(topicId) {
+            currentTopicId = topicId;
+            const topic = topicsData.find(t => t.id === topicId);
+            
+            renderDesktopNav();
+            renderMobileNav();
+            renderSubtopicSidebar(topic);
+
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = topic.content;
+
+            if (topicId === "t6_2") {
+                setDuplexMode('full');
+            } else if (topicId === "t6_3") {
+                inspectFrameField('dstMac');
+                renderRouterHop();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileDrawer() {
+            document.getElementById('mobileDrawer').classList.toggle('hidden');
+        }
+
+        function handleSearch(query) {
+            if (!query.trim()) return;
+            const term = query.toLowerCase();
+            const matchedTopic = topicsData.find(t => t.content.toLowerCase().includes(term) || t.title.toLowerCase().includes(term));
+            if (matchedTopic && matchedTopic.id !== currentTopicId) {
+                selectTopic(matchedTopic.id);
+            }
+        }
+
+        // Scroll Progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // INIT
+        window.onload = function() {
+            selectTopic("t6_0_1");
+
+            document.getElementById('mobileNavToggle').addEventListener('click', toggleMobileDrawer);
+            document.getElementById('closeDrawer').addEventListener('click', toggleMobileDrawer);
+
+            document.getElementById('searchInput').addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') handleSearch(e.target.value);
+            });
+        };
+    </script>
+</body>
+</html>

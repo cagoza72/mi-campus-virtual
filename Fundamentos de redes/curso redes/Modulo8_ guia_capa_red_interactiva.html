@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Módulo 8: Capa de Red - Guía Interactiva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="p-2 bg-blue-500/10 text-blue-400 rounded-lg border border-blue-500/20">
+          <i class="ph ph-globe-hemisphere-west text-2xl"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-white">Módulo 8: Capa de Red</h1>
+          <p class="text-xs text-slate-400">Fundamentos de Redes • Capa 3 (OSI)</p>
+        </div>
+      </div>
+      <span class="px-3 py-1 bg-blue-950 text-blue-300 border border-blue-800 rounded-full text-xs font-semibold">
+        CCNA - Módulo 8
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
+    
+    <!-- Sidebar -->
+    <aside class="lg:col-span-1 space-y-2">
+      <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 sticky top-24">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">Contenido</h2>
+        <nav class="space-y-1 text-sm">
+          <a href="#caracteristicas" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">8.1 Características IP</a>
+          <a href="#ipv4" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">8.2 Paquete IPv4</a>
+          <a href="#ipv6" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">8.3 Paquete IPv6</a>
+          <a href="#rutas-host" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">8.4 Cómo enruta el Host</a>
+          <a href="#enrutamiento" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">8.5 Introducción al Enrutamiento</a>
+          <a href="#evaluacion" class="block px-3 py-2 rounded-lg text-blue-400 font-medium hover:bg-slate-700 transition-colors">Autoevaluación</a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Content -->
+    <div class="lg:col-span-3 space-y-12">
+
+      <!-- Section 8.1 -->
+      <section id="caracteristicas" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-info text-2xl text-blue-400"></i>
+          <h2 class="text-2xl font-bold text-white">8.1 Características de la Capa de Red</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          La Capa 3 se encarga de mover paquetes de extremo a extremo a través de redes globales. El protocolo IP se diseñó bajo tres pilares fundamentales:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-blue-400 text-sm">Sin Conexión</h3>
+            <p class="text-xs text-slate-400">No se establece un circuito dedicado con el receptor antes de enviar los datos.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-blue-400 text-sm">Esfuerzo Mejorado</h3>
+            <p class="text-xs text-slate-400">No garantiza que el paquete llegue (no fiable). Deja la recuperación a protocolos de capa superior.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-blue-400 text-sm">Independiente de Medios</h3>
+            <p class="text-xs text-slate-400">Funciona sin importar si el paquete viaja por fibra, cable de cobre o Wi-Fi.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8.2 -->
+      <section id="ipv4" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-stack text-2xl text-blue-400"></i>
+          <h2 class="text-2xl font-bold text-white">8.2 Paquete IPv4 y el Campo TTL</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          El encabezado IPv4 estándar mide 20 bytes. Uno de sus campos más críticos es el **TTL (Time to Live)**, el cual previene bucles de enrutamiento infinitos disminuyendo su valor en 1 por cada router que atraviesa.
+        </p>
+
+        <!-- TTL Simulator -->
+        <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="ph ph-play-circle text-blue-400"></i> Simulador de TTL (Time to Live)
+          </h3>
+          <div class="flex items-center gap-4">
+            <label class="text-xs text-slate-300">Valor TTL Inicial:</label>
+            <input id="ttl-input" type="number" value="3" min="1" max="10" class="bg-slate-800 text-white p-2 rounded w-20 text-center border border-slate-700 text-sm">
+            <button onclick="simulateTTL()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs rounded-lg transition-colors">
+              Simular Salto de Routers
+            </button>
+          </div>
+          <div id="ttl-log" class="p-4 bg-slate-950 rounded-lg border border-slate-800 text-xs font-mono text-blue-300 space-y-2">
+            > Haz clic en "Simular Salto de Routers" para ver el comportamiento del paquete.
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8.4 & 8.5 -->
+      <section id="enrutamiento" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-compass text-2xl text-blue-400"></i>
+          <h2 class="text-2xl font-bold text-white">8.4 y 8.5 Tablas de Enrutamiento y Gateway</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Cuando un host quiere comunicarse fuera de su red local, envía el tráfico obligatoriamente a su **Puerta de Enlace Predeterminada (Default Gateway)**. Los routers consultan su tabla de enrutamiento para determinar la interfaz de salida de cada paquete.
+        </p>
+      </section>
+
+      <!-- Quiz -->
+      <section id="evaluacion" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-check-square-offset text-2xl text-blue-400"></i>
+          <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 8</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3">
+            <p class="text-sm font-semibold text-white">1. ¿Cuál es el propósito principal del campo TTL en el encabezado IPv4?</p>
+            <div class="space-y-2 text-xs">
+              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Medir la velocidad de transferencia de la red</button>
+              <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B

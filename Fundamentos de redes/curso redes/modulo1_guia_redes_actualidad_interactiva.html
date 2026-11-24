@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,16 +33,19 @@
 
   <!-- Main Container -->
   <main class="max-w-7xl mx-auto px-4 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-4 gap-8">
-    
+
     <!-- Sidebar -->
-    <aside class="lg:col-span-1 space-y-2">
+    <aside class="lg:col-span-1">
       <div class="bg-slate-800 p-4 rounded-xl border border-slate-700 sticky top-24">
         <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3 px-2">Contenido</h2>
         <nav class="space-y-1 text-sm">
+          <a href="#actualidad" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.1 Redes en la Actualidad</a>
           <a href="#componentes" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.2 Componentes de Red</a>
+          <a href="#topologias" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.3 Topologías y Representaciones</a>
           <a href="#tipos" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.4 Tipos de Redes (LAN/WAN)</a>
           <a href="#confiabilidad" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.6 Redes Confiables</a>
           <a href="#tendencias" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.7 Tendencias (BYOD/Nube)</a>
+          <a href="#seguridad" class="block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-700 hover:text-white transition-colors">1.8 Seguridad de Red</a>
           <a href="#evaluacion" class="block px-3 py-2 rounded-lg text-sky-400 font-medium hover:bg-slate-700 transition-colors">Autoevaluación</a>
         </nav>
       </div>
@@ -51,6 +54,35 @@
     <!-- Content -->
     <div class="lg:col-span-3 space-y-12">
 
+      <!-- Section 1.1 -->
+      <section id="actualidad" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-broadcast text-2xl text-sky-400"></i>
+          <h2 class="text-2xl font-bold text-white">1.1 Las Redes en la Actualidad</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Las redes de datos se han vuelto esenciales para el funcionamiento de la sociedad moderna. Eliminan las barreras geográficas y del tiempo, permitiendo el intercambio instantáneo de información, la colaboración en tiempo real y el acceso a servicios digitales desde prácticamente cualquier lugar.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Comunicación y Trabajo</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Mensajería instantánea, videoconferencias, correo electrónico y trabajo remoto sobre infraestructuras conectadas.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Aprendizaje y Colaboración</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Aulas virtuales, laboratorios remotos, repositorios académicos y proyectos distribuidos entre estudiantes y docentes.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Comercio y Servicios</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Banca en línea, sistemas administrativos, telemedicina y cadenas logísticas apoyadas en redes confiables.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Entretenimiento y Movilidad</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Transmisión de video bajo demanda, juegos en línea y dispositivos conectados en movimiento.</p>
+          </div>
+        </div>
+      </section>
+
       <!-- Section 1.2 -->
       <section id="componentes" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
         <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
@@ -58,56 +90,309 @@
           <h2 class="text-2xl font-bold text-white">1.2 Componentes de la Red</h2>
         </div>
         <p class="text-slate-300 leading-relaxed">
-          Una red está formada por dispositivos finales, dispositivos intermediarios y los medios físicos que los interconectan.
+          Una red está formada por tres categorías fundamentales: <strong class="text-white">dispositivos finales</strong>, <strong class="text-white">dispositivos intermediarios</strong> y <strong class="text-white">medios de red</strong> que transportan las señales.
         </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+            <h3 class="font-bold text-sky-400 text-sm">Dispositivos Finales (Hosts)</h3>
+            <p class="text-slate-400 leading-relaxed">Origen o destino del mensaje en la red: PC, laptops, servidores, teléfonos IP, cámaras y smartphones.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+            <h3 class="font-bold text-sky-400 text-sm">Dispositivos Intermediarios</h3>
+            <p class="text-slate-400 leading-relaxed">Interconectan hosts y gestionan el flujo: switches, routers, puntos de acceso inalámbrico (AP) y firewalls.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+            <h3 class="font-bold text-sky-400 text-sm">Medios de Red</h3>
+            <p class="text-slate-400 leading-relaxed">Canal por donde viajan los datos: cobre (impulsos eléctricos), fibra óptica (luz) e inalámbrico (ondas de radio).</p>
+          </div>
+        </div>
 
         <!-- Interactive Classifier -->
         <div class="bg-slate-900 p-6 rounded-xl border border-slate-700 space-y-4">
           <h3 class="text-sm font-semibold text-sky-300">Clasificador Rápido de Componentes</h3>
-          <p class="text-xs text-slate-400">Haz clic en un componente para identificar a qué categoría pertenece:</p>
-          <div class="flex flex-wrap gap-2">
-            <button onclick="classify('router')" class="px-3 py-2 bg-slate-800 hover:bg-sky-600 rounded-lg text-xs font-mono transition-colors">Router</button>
-            <button onclick="classify('pc')" class="px-3 py-2 bg-slate-800 hover:bg-sky-600 rounded-lg text-xs font-mono transition-colors">PC / Laptop</button>
-            <button onclick="classify('fibra')" class="px-3 py-2 bg-slate-800 hover:bg-sky-600 rounded-lg text-xs font-mono transition-colors">Fibra Óptica</button>
-            <button onclick="classify('switch')" class="px-3 py-2 bg-slate-800 hover:bg-sky-600 rounded-lg text-xs font-mono transition-colors">Switch</button>
+          <p class="text-xs text-slate-400">Haz clic en un componente para identificar su función y categoría:</p>
+          <div class="flex flex-wrap gap-2" id="classifier-buttons">
+            <button type="button" data-type="router" onclick="classify('router')" class="classifier-btn px-3 py-2 bg-slate-800 hover:bg-sky-600 text-slate-200 rounded-lg text-xs font-mono transition-colors border border-slate-700">Router</button>
+            <button type="button" data-type="pc" onclick="classify('pc')" class="classifier-btn px-3 py-2 bg-slate-800 hover:bg-sky-600 text-slate-200 rounded-lg text-xs font-mono transition-colors border border-slate-700">PC / Laptop</button>
+            <button type="button" data-type="fibra" onclick="classify('fibra')" class="classifier-btn px-3 py-2 bg-slate-800 hover:bg-sky-600 text-slate-200 rounded-lg text-xs font-mono transition-colors border border-slate-700">Fibra Óptica</button>
+            <button type="button" data-type="switch" onclick="classify('switch')" class="classifier-btn px-3 py-2 bg-slate-800 hover:bg-sky-600 text-slate-200 rounded-lg text-xs font-mono transition-colors border border-slate-700">Switch</button>
           </div>
           <div id="classification-result" class="p-3 bg-slate-950 rounded-lg border border-slate-800 text-xs text-sky-300 font-mono">
-            Selecciona un componente arriba para ver su descripción de capa.
+            Selecciona un componente arriba para ver su categoría y descripción.
           </div>
         </div>
       </section>
 
-      <!-- Section 1.4 & 1.6 -->
+      <!-- Section 1.3 -->
+      <section id="topologias" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-flow-arrow text-2xl text-sky-400"></i>
+          <h2 class="text-2xl font-bold text-white">1.3 Topologías y Representaciones de Red</h2>
+        </div>
+
+        <p class="text-slate-300 leading-relaxed">
+          Los diagramas de red utilizan símbolos estandarizados para representar cómo se conectan los dispositivos finales, los dispositivos intermediarios y los medios de comunicación, permitiendo distinguir entre la <strong class="text-white">topología física</strong> y la <strong class="text-white">topología lógica</strong>.
+        </p>
+
+        <!-- Símbolos estándar de red -->
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="text-sm font-bold text-sky-400">Símbolos Estándar de Red y Diagramas</h3>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            En los diagramas de red (como en Cisco Packet Tracer o documentación de infraestructura), cada componente tiene un ícono convencional: tarjetas NIC o puertos representan la conexión física del host; líneas continuas suelen indicar medios guiados (cobre o fibra) y líneas punteadas o con ondas representan enlaces inalámbricos.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1 text-xs">
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <p class="font-semibold text-white">Hosts / Finales</p>
+              <p class="text-slate-400 mt-1">PC de escritorio, laptop, servidor, impresora de red o teléfono IP.</p>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <p class="font-semibold text-white">Intermediarios</p>
+              <p class="text-slate-400 mt-1">Switch (conmutación LAN), Router (enrutamiento entre redes) y Firewall/AP.</p>
+            </div>
+            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800">
+              <p class="font-semibold text-white">Medios y Enlaces</p>
+              <p class="text-slate-400 mt-1">LAN (conexión local), WAN (enlace de área amplia) e inalámbrico.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparativa LAN vs. WAN -->
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-3">
+          <h3 class="text-sm font-bold text-sky-400">Representación de Redes LAN vs. WAN</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-slate-700 text-sky-300">
+                  <th class="py-2 pr-4 font-semibold">Aspecto</th>
+                  <th class="py-2 px-4 font-semibold">Red LAN</th>
+                  <th class="py-2 pl-4 font-semibold">Red WAN</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 text-slate-300">
+                <tr>
+                  <td class="py-2.5 pr-4 font-medium text-white">Cobertura</td>
+                  <td class="py-2.5 px-4 text-slate-400">Área geográfica limitada (hogar, aula, edificio o campus).</td>
+                  <td class="py-2.5 pl-4 text-slate-400">Amplia distancia geográfica (ciudades, regiones o países).</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 pr-4 font-medium text-white">Administración</td>
+                  <td class="py-2.5 px-4 text-slate-400">Generalmente administrada por una organización o usuario.</td>
+                  <td class="py-2.5 pl-4 text-slate-400">Enlaces operados por proveedores de servicios (ISP/telecomunicaciones).</td>
+                </tr>
+                <tr>
+                  <td class="py-2.5 pr-4 font-medium text-white">Velocidad y medios</td>
+                  <td class="py-2.5 px-4 text-slate-400">Alta velocidad interna (Ethernet UTP/fibra y Wi-Fi).</td>
+                  <td class="py-2.5 pl-4 text-slate-400">Velocidades variables según el enlace contratado (fibra, enlaces dedicados, etc.).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Topologías físicas -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-sky-400">Topologías Físicas (Disposición Real de Cables y Dispositivos)</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+              <h4 class="font-bold text-white text-sm">Estrella</h4>
+              <p class="text-slate-400 leading-relaxed">Los dispositivos finales se conectan a un punto central (comúnmente un switch). Facilita la detección de fallas y el agregado de equipos, aunque el nodo central es crítico.</p>
+            </div>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+              <h4 class="font-bold text-white text-sm">Malla (Completa o Parcial)</h4>
+              <p class="text-slate-400 leading-relaxed">Los dispositivos cuentan con múltiples interconexiones entre sí. Brinda alta redundancia y tolerancia a fallas, a cambio de mayor costo y complejidad de cableado.</p>
+            </div>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+              <h4 class="font-bold text-white text-sm">Híbrida</h4>
+              <p class="text-slate-400 leading-relaxed">Combina dos o más topologías físicas (por ejemplo, estrellas interconectadas en malla o jerarquía) para adaptarse a necesidades reales de campus o empresas.</p>
+            </div>
+            <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+              <h4 class="font-bold text-white text-sm">Bus</h4>
+              <p class="text-slate-400 leading-relaxed">Todos los nodos comparten un medio troncal común con terminadores en sus extremos. Es sencilla en tramos cortos, pero un corte en el troncal afecta la comunicación del segmento.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topologías lógicas -->
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-700 space-y-2">
+          <h3 class="text-sm font-bold text-sky-400">Topologías Lógicas (Flujo de Datos y Direccionamiento)</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            La <strong class="text-white">topología lógica</strong> describe cómo viajan realmente los datos a través de la red y cómo se identifican los dispositivos mediante <strong class="text-white">direcciones IP</strong>, <strong class="text-white">subredes/VLAN</strong> y <strong class="text-white">nombres de interfaz</strong>. Dos redes pueden tener la misma topología física (por ejemplo, una estrella cableada a un switch) pero distinta topología lógica al segmentarse en diferentes subredes IP o VLAN.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 1.4 -->
+      <section id="tipos" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-graph text-2xl text-sky-400"></i>
+          <h2 class="text-2xl font-bold text-white">1.4 Tipos de Redes (LAN y WAN)</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          Las infraestructuras de red varían según su cobertura geográfica, el número de dispositivos conectados y la administración de los enlaces. Las dos categorías principales son <strong class="text-white">LAN</strong> y <strong class="text-white">WAN</strong>, interconectadas a través de <strong class="text-white">Internet</strong> (una red de redes global).
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">LAN (Local Area Network)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Cubre un área geográfica limitada (hogar, aula, edificio o campus). Suele ser administrada por una organización o individuo y ofrece altas velocidades de transmisión.
+            </p>
+          </div>
+          <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">WAN (Wide Area Network)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Interconecta redes LAN a través de amplias distancias geográficas (ciudades, países o continentes), habitualmente mediante enlaces provistos por proveedores de telecomunicaciones (ISP).
+            </p>
+          </div>
+        </div>
+        <div class="bg-slate-900/70 p-4 rounded-xl border border-slate-700/80 text-xs text-slate-300 space-y-1">
+          <p><strong class="text-sky-300">Intranet vs. Extranet:</strong> Una <span class="text-white">intranet</span> es una red privada accesible solo para miembros de una organización; una <span class="text-white">extranet</span> extiende de forma controlada el acceso a proveedores, socios o clientes autorizados.</p>
+        </div>
+      </section>
+
+      <!-- Section 1.6 -->
       <section id="confiabilidad" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
         <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
           <i class="ph ph-shield-check text-2xl text-sky-400"></i>
           <h2 class="text-2xl font-bold text-white">1.6 Arquitectura y Confiabilidad</h2>
         </div>
+        <p class="text-slate-300 leading-relaxed">
+          Para que una red sea confiable y respalde las operaciones críticas sin interrupciones, su arquitectura debe sostener cuatro características clave:
+        </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
             <h3 class="font-bold text-sky-400 text-sm">Tolerancia a Fallas</h3>
-            <p class="text-xs text-slate-400">Capacidad de la red de redirigir el tráfico automáticamente si un enlace físico se rompe.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Capacidad de la red para limitar el impacto de un fallo y redirigir el tráfico por rutas alternativas mediante enlaces redundantes y conmutación por error.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Escalabilidad</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Capacidad de crecer agregando nuevos usuarios, sitios o servicios sobre la infraestructura existente sin degradar el rendimiento general.</p>
           </div>
           <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
             <h3 class="font-bold text-sky-400 text-sm">Calidad de Servicio (QoS)</h3>
-            <p class="text-xs text-slate-400">Priorización de paquetes críticos (como video o llamadas IP) ante la congestión de la red.</p>
+            <p class="text-xs text-slate-400 leading-relaxed">Mecanismo de priorización del tráfico sensible al retardo (como voz y video en tiempo real) cuando se presenta congestión en los enlaces.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Seguridad de Red</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Protección de la confidencialidad, integridad y disponibilidad de la información tanto en la infraestructura como en los dispositivos finales.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1.7 -->
+      <section id="tendencias" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-cloud-arrow-up text-2xl text-sky-400"></i>
+          <h2 class="text-2xl font-bold text-white">1.7 Tendencias en las Redes</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          La evolución de los dispositivos y servicios digitales ha impulsado modelos de uso que exigen redes más flexibles, rápidas y seguras:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">BYOD (Bring Your Own Device)</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Uso de dispositivos personales (laptops, tabletas, teléfonos) dentro de entornos académicos o corporativos con políticas de acceso y seguridad.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Computación en la Nube</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Almacenamiento y ejecución de aplicaciones en centros de datos remotos (nubes públicas, privadas, híbridas o comunitarias) accesibles bajo demanda.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Colaboración en Línea y Video</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Reuniones virtuales, espacios de trabajo compartidos y transmisión multimedia que demandan ancho de banda constante y baja latencia.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-2">
+            <h3 class="font-bold text-sky-400 text-sm">Redes Inalámbricas y Powerline</h3>
+            <p class="text-xs text-slate-400 leading-relaxed">Expansión de Wi-Fi de alta capacidad, redes celulares de banda ancha y adaptadores powerline que aprovechan el cableado eléctrico existente.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1.8 -->
+      <section id="seguridad" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
+        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
+          <i class="ph ph-lock-key text-2xl text-sky-400"></i>
+          <h2 class="text-2xl font-bold text-white">1.8 Seguridad de Red</h2>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          La seguridad en red requiere proteger los datos frente a amenazas externas e internas mediante controles en capas:
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+            <h3 class="font-bold text-amber-400 text-sm">Amenazas Comunes</h3>
+            <p class="text-slate-400 leading-relaxed">Virus, troyanos, spyware, ataques de denegación de servicio (DoS), robo de identidad, intercepción de datos y accesos no autorizados.</p>
+          </div>
+          <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 space-y-1.5">
+            <h3 class="font-bold text-emerald-400 text-sm">Medidas de Defensa</h3>
+            <p class="text-slate-400 leading-relaxed">Software antivirus/antimalware, listas de control de acceso (ACL), firewalls, sistemas de prevención de intrusiones (IPS) y redes privadas virtuales (VPN).</p>
           </div>
         </div>
       </section>
 
       <!-- Quiz -->
       <section id="evaluacion" class="bg-slate-800 p-6 md:p-8 rounded-2xl border border-slate-700 space-y-6">
-        <div class="flex items-center gap-3 border-b border-slate-700 pb-4">
-          <i class="ph ph-check-square-offset text-2xl text-sky-400"></i>
-          <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 1</h2>
+        <div class="flex items-center justify-between flex-wrap gap-3 border-b border-slate-700 pb-4">
+          <div class="flex items-center gap-3">
+            <i class="ph ph-check-square-offset text-2xl text-sky-400"></i>
+            <h2 class="text-2xl font-bold text-white">Autoevaluación: Módulo 1</h2>
+          </div>
+          <span id="quiz-score" class="text-xs font-mono px-3 py-1 rounded-full bg-slate-900 text-sky-300 border border-slate-700">
+            Puntaje: 0 / 5
+          </span>
         </div>
-        <div class="space-y-4">
-          <div class="p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3">
+
+        <div class="space-y-5">
+          <!-- Pregunta 1 -->
+          <div class="quiz-item p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3" data-answered="false">
             <p class="text-sm font-semibold text-white">1. ¿Qué característica de la red garantiza que el sistema pueda crecer añadiendo nuevos usuarios sin degradar su rendimiento?</p>
             <div class="space-y-2 text-xs">
-              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Tolerancia a fallas</button>
-              <button onclick="checkQuiz(this, true)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) Escalabilidad</button>
-              <button onclick="checkQuiz(this, false)" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Calidad de Servicio (QoS)</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. La tolerancia a fallas mantiene la conectividad ante caídas de enlaces o dispositivos.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Tolerancia a fallas</button>
+              <button type="button" onclick="checkQuiz(this, true, '¡Correcto! La escalabilidad permite expandir la red sin afectar negativamente a los usuarios existentes.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) Escalabilidad</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. QoS prioriza paquetes críticos (como voz o video) cuando hay congestión.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Calidad de Servicio (QoS)</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+
+          <!-- Pregunta 2 -->
+          <div class="quiz-item p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3" data-answered="false">
+            <p class="text-sm font-semibold text-white">2. ¿Cuál es la diferencia principal entre una topología física y una topología lógica?</p>
+            <div class="space-y-2 text-xs">
+              <button type="button" onclick="checkQuiz(this, true, '¡Correcto! La topología física muestra la ubicación real de cables y equipos, mientras la lógica describe cómo fluyen los datos y el direccionamiento.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) La física representa la disposición real de cables y equipos; la lógica muestra cómo fluyen los datos y el direccionamiento</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Ambos tipos de topología aplican tanto a redes cableadas como inalámbricas.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) La física solo se usa en redes inalámbricas y la lógica únicamente en fibra óptica</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. La topología lógica también incluye redes LAN y WAN.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) No existe diferencia; ambos términos son sinónimos exactos</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+
+          <!-- Pregunta 3 -->
+          <div class="quiz-item p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3" data-answered="false">
+            <p class="text-sm font-semibold text-white">3. ¿Qué tipo de red interconecta redes LAN a través de grandes distancias geográficas?</p>
+            <div class="space-y-2 text-xs">
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Una LAN abarca un área local reducida como un hogar o edificio.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) LAN</button>
+              <button type="button" onclick="checkQuiz(this, true, '¡Correcto! Una WAN (Wide Area Network) conecta redes separadas geográficamente.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) WAN</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Una intranet es una red privada interna de una organización.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Intranet</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+
+          <!-- Pregunta 4 -->
+          <div class="quiz-item p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3" data-answered="false">
+            <p class="text-sm font-semibold text-white">4. ¿A qué hace referencia el concepto BYOD en las redes actuales?</p>
+            <div class="space-y-2 text-xs">
+              <button type="button" onclick="checkQuiz(this, true, '¡Correcto! BYOD (Bring Your Own Device) consiste en utilizar dispositivos personales en entornos de estudio o trabajo.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Usar dispositivos personales para acceder a recursos de la red institucional o laboral</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Ese concepto corresponde al reemplazo de cables por enlaces ópticos.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) Sustituir todo el cableado de cobre por fibra óptica</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Ese término se asocia con el respaldo local de discos duros.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Respaldar datos únicamente en discos externos locales</button>
+            </div>
+            <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
+          </div>
+
+          <!-- Pregunta 5 -->
+          <div class="quiz-item p-4 bg-slate-900 rounded-xl border border-slate-700 space-y-3" data-answered="false">
+            <p class="text-sm font-semibold text-white">5. ¿Qué herramienta ayuda a controlar el tráfico que entra o sale de una red según reglas definidas?</p>
+            <div class="space-y-2 text-xs">
+              <button type="button" onclick="checkQuiz(this, true, '¡Correcto! Un firewall filtra y controla el tráfico de red según políticas de seguridad.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">A) Firewall</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Un cable patch es un medio físico de conexión.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">B) Cable patch UTP</button>
+              <button type="button" onclick="checkQuiz(this, false, 'Incorrecto. Una regleta eléctrica suministra energía, no filtra paquetes de red.')" class="w-full text-left p-3 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-colors">C) Multicontacto eléctrico</button>
             </div>
             <div class="quiz-feedback hidden p-3 rounded-lg text-xs font-semibold"></div>
           </div>
@@ -118,25 +403,48 @@
   </main>
 
   <script>
+    let score = 0;
+    const totalQuestions = document.querySelectorAll('.quiz-item').length;
+
     function classify(type) {
       const data = {
-        'router': '<b>Router:</b> Dispositivo intermediario de Capa 3 responsable de interconectar distintas redes y tomar decisiones de enrutamiento.',
-        'pc': '<b>PC / Dispositivo Final (Host):</b> Cliente o servidor final que origina o consume el tráfico de datos en la red.',
-        'fibra': '<b>Fibra Óptica:</b> Medio de red físico guiado que transmite datos mediante pulsos de luz a gran velocidad.',
-        'switch': '<b>Switch:</b> Dispositivo intermediario de Capa 2 que conecta dispositivos dentro de una misma red local (LAN).'
+        'router': '<b>[Intermediario • Capa 3] Router:</b> Interconecta distintas redes y determina la mejor ruta para enviar paquetes entre ellas.',
+        'pc': '<b>[Dispositivo Final / Host] PC / Laptop:</b> Equipo cliente o usuario final que origina o recibe datos en la red.',
+        'fibra': '<b>[Medio de Red] Fibra Óptica:</b> Medio físico guiado que transmite señales mediante pulsos de luz con alta inmunidad a interferencias.',
+        'switch': '<b>[Intermediario • Capa 2] Switch:</b> Conecta dispositivos dentro de una misma red local (LAN) y reenvía tramas según direcciones MAC.'
       };
+
+      document.querySelectorAll('.classifier-btn').forEach(btn => {
+        const isSelected = btn.dataset.type === type;
+        btn.setAttribute('aria-pressed', isSelected);
+        btn.classList.toggle('bg-sky-600', isSelected);
+        btn.classList.toggle('text-white', isSelected);
+        btn.classList.toggle('border-sky-400', isSelected);
+        btn.classList.toggle('bg-slate-800', !isSelected);
+        btn.classList.toggle('text-slate-200', !isSelected);
+        btn.classList.toggle('border-slate-700', !isSelected);
+      });
+
       document.getElementById('classification-result').innerHTML = data[type];
     }
 
-    function checkQuiz(btn, isCorrect) {
-      const feedback = btn.parentElement.nextElementSibling;
+    function checkQuiz(btn, isCorrect, message) {
+      const item = btn.closest('.quiz-item');
+      const feedback = item.querySelector('.quiz-feedback');
+      const alreadyScored = item.dataset.scored === 'true';
+
       feedback.classList.remove('hidden', 'bg-emerald-950', 'text-emerald-300', 'bg-rose-950', 'text-rose-300');
       if (isCorrect) {
         feedback.classList.add('bg-emerald-950', 'text-emerald-300');
-        feedback.innerText = '¡Correcto! La escalabilidad permite que la red se expanda sin afectar negativamente a los usuarios existentes.';
+        feedback.innerText = message;
+        if (!alreadyScored) {
+          score++;
+          item.dataset.scored = 'true';
+          document.getElementById('quiz-score').innerText = `Puntaje: ${score} / ${totalQuestions}`;
+        }
       } else {
         feedback.classList.add('bg-rose-950', 'text-rose-300');
-        feedback.innerText = 'Incorrecto. Inténtalo de nuevo.';
+        feedback.innerText = message;
       }
     }
   </script>
